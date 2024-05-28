@@ -7,14 +7,35 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      tablet: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      laptop: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      desktop: "1280px",
+      // => @media (min-width: 1280px) { ... }
+    },
+    colors: {
+      primary: "#fcb914",
+      text: "#2f2104",
+      darktext: "#f5f5f5",
+      link: "#817459",
+      inputBg: "#bfbfbf",
+      bgColor: "#e1e1e1",
+      darkBgColor: "#433e3c",
+    },
+    fontFamily: {
+      sans: ["DM Sans", "sans-serif"],
+    },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      borderRadius: {
+        normal: "15px",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
+  darkMode: "class",
 };
 export default config;
