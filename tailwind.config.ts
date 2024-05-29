@@ -33,6 +33,9 @@ const config: Config = {
       borderRadius: {
         normal: "15px",
       },
+      aspectRatio: {
+        "4/3": "4 / 3",
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],
