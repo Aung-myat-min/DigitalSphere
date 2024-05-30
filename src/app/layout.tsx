@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./ThemeProvider";
 import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <Providers>
-        <NavBar />
         <body
           className={`${inter.className} font-sans bg-bgColor relative pt-[100px] dark:bg-darkBgColor`}
         >
+          <NavBar />
           {children}
+          <Footer />
         </body>
       </Providers>
     </html>

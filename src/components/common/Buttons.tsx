@@ -11,7 +11,7 @@ export default function Button({ text, type, className }: ButtonProps) {
     <button
       className={`${
         type === "primary" ? primary : secondary
-      } py-3 font-medium rounded-full hover:brightness-110 ${className}`}
+      } py-3 font-bold rounded-full hover:brightness-110 ${className}`}
     >
       {text}
     </button>
