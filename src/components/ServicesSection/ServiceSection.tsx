@@ -5,8 +5,8 @@ import Button from "../common/Buttons";
 
 export default function ServiceSection() {
   return (
-    <section className="p-6 laptop:p-12 desktop:p-14">
-      <h1 className="text-2xl font-bold inline-block relative pb-[5px] before:content-[''] before:absolute before:w-4/6 before:h-[5px] before:bg-primary before:left-0 before:bottom-0">
+    <section className="p-6 laptop:p-12 desktop:p-14" id="service">
+      <h1 className=" z-[-1] text-2xl font-bold inline-block relative pb-[5px] before:content-[''] before:absolute before:w-4/6 before:h-[5px] before:bg-primary before:left-0 before:bottom-0">
         Services
       </h1>
       <div className="mt-8 mb-[2rem] flex flex-cols tablet:flex-row laptop:mb-[6rem] justify-between items-center gap-8">

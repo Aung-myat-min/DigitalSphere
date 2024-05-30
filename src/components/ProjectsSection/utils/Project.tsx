@@ -11,7 +11,10 @@ interface ProjectProps {
 
 export default function Project({ title, image, link }: ProjectProps) {
   return (
-    <div className=" max-w-[20rem] overflow-hidden  tablet:max-w-[22rem] laptop:max-w-[24rem] desktop:max-w-[25rem]">
+    <div
+      className="max-w-[20rem] overflow-hidden  tablet:max-w-[22rem] laptop:max-w-[24rem] desktop:max-w-[25rem]"
+      id="project"
+    >
       <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden">
         <Image
           src={image}
