@@ -1,0 +1,19 @@
+/* styles/Accordion.module.css */
+.summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+/* The open class will be dynamically added to the details element */
+.details[open] .arrow {
+  transform: rotate(90deg);
+}
+.details[open] .summary {
+  margin-left: 3rem;
+}
