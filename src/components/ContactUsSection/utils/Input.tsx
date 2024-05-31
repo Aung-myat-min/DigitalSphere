@@ -23,7 +23,7 @@ export default function Input({
         name={name}
         id={id}
         required={required}
-        className="bg-inputBg focus:bg-[#fff] focus:border-primary font-medium text-[22px] rounded-2xl py-3 px-4 h-[75px]"
+        className="bg-inputBg focus:bg-[#fff] focus:border-primary font-medium text-[22px] rounded-2xl py-3 px-4 h-[75px] dark:text-[#000]"
       />
     </div>
   );

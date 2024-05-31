@@ -19,7 +19,7 @@ export default function ThemeSwitcher() {
     return (
       <button
         onClick={() => setTheme("light")}
-        className="hover:bg-primary flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 transition duration-300 ease-in-out"
+        className="hover:bg-primary flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 transition duration-300 ease-in-out cursor-pointer"
       >
         <Image src={moon} alt="Moon Icon" className="invert " />
       </button>
@@ -28,7 +28,7 @@ export default function ThemeSwitcher() {
     return (
       <button
         onClick={() => setTheme("dark")}
-        className="hover:bg-primary flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
+        className="hover:bg-primary flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out cursor-pointer"
       >
         <Image src={sun} alt="Sun Icon" className="" />
       </button>

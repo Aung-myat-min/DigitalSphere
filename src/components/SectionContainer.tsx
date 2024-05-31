@@ -6,7 +6,7 @@ import ServiceSection from "./ServicesSection/ServiceSection";
 
 export default function SectionContainer() {
   return (
-    <div>
+    <div className="w-full">
       <MainSection />
       <ProjectSection />
       <ServiceSection />

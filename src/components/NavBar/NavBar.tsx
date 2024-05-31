@@ -31,7 +31,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`w-full h-[100px] flex items-center justify-between px-[3vw] fixed top-0 left-0 z-2 ${
+      className={`w-[100vw] h-[100px] flex items-center justify-between px-[3vw] fixed top-0 left-0 z-2 ${
         navBg ? "bg-[#d9d9d9] dark:bg-text" : ""
       }`}
     >
@@ -42,7 +42,7 @@ export default function NavBar() {
         <Image
           src={HamburgerIcon}
           alt="Hamburger Icon"
-          className="cursor-pointer"
+          className="cursor-pointer dark:invert"
           onClick={navToggle}
         />
         <ThemeSwitcher />
