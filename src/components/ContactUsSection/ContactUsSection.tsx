@@ -10,7 +10,7 @@ export default function ContactUsSection() {
       id="contact"
       className="w-full flex flex-col items-center justify-around gap-8 px-14 tablet:flex-row"
     >
-      <form action="" method="post" className="">
+      <form action="" method="post" className="flex-1">
         <h1 className="text-[40px] font-bold mb-7">Let's Talk</h1>
         <div className="flex flex-col gap-5 mb-8">
           <Input

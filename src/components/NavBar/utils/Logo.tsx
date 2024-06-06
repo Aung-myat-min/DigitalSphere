@@ -1,6 +1,6 @@
 "use client";
 import LightLogo from "@/../public/icons/digital-sphere.svg";
-import DarkLogo from "@/../public/icons/digital-sphere.svg";
+import DarkLogo from "@/../public/icons/digital-sphered.svg";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";

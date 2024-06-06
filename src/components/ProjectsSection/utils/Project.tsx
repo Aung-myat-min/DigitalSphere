@@ -29,7 +29,7 @@ export default function Project({ title, image, link }: ProjectProps) {
           href={link}
           className="flex flex-row text-link items-center gap-1 hover:text-text group"
         >
-          Details{" "}
+          Details
           <Image
             src={LongRightArrow}
             alt="click here"

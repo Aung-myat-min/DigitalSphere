@@ -8,10 +8,10 @@ export default function ProjectSection() {
   return (
     <section
       id="project"
-      className="mx-auto grid grid-cols-2 justify-items-center tablet:grid-flow-cols-2 laptop:grid-cols-3 desktop:grid-cols-3 gap-4"
+      className="px-2 mx-auto grid grid-cols-2 justify-items-center tablet:grid-flow-cols-2 laptop:grid-cols-3 desktop:grid-cols-3 gap-4"
     >
-      <div className=" max-w-[20rem] overflow-hidden  tablet:max-w-[22rem] laptop:max-w-[24rem] desktop:max-w-[25rem]">
-        <div className="w-full aspect-[4/3] rounded-2xl bg-[#fcbb15] overflow-hidden flex flex-col justify-center px-[2.3rem]">
+      <div className="overflow-hidden tablet:max-w-[22rem] laptop:max-w-[24rem] desktop:max-w-[25rem] col-span-2 tablet:col-span-1">
+        <div className="w-full aspect-[4/3] rounded-2xl bg-[#fcbb15] overflow-hidden flex flex-col justify-center px-[0.5rem] tablet:px-[1rem] laptop:px-[2.3rem]">
           <h1 className="text-4xl text-[#fff] font-bold">
             Showcase of <br /> Our Projects
           </h1>
