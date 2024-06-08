@@ -1,17 +1,22 @@
 "use client";
 interface InputProps {
   labelText: string;
-  required: boolean;
-  type: "text" | "email" | "tel";
   name: string;
   id: string;
+  required?: boolean;
+  type: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
 export default function Input({
   labelText,
-  required,
-  type,
   name,
   id,
+  required,
+  type,
+  value,
+  onChange,
 }: InputProps) {
   return (
     <div className="flex flex-col gap-3">
@@ -23,6 +28,8 @@ export default function Input({
         name={name}
         id={id}
         required={required}
+        value={value}
+        onChange={onChange}
         className="bg-inputBg focus:bg-[#fff] focus:border-primary font-medium text-[22px] rounded-2xl py-3 px-4 h-[75px] dark:text-[#000]"
       />
     </div>

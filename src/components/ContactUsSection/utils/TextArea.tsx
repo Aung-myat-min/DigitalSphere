@@ -1,15 +1,19 @@
 "use client";
 interface TextAreaProps {
   labelText: string;
-  required: boolean;
   name: string;
   id: string;
+  required?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 export default function TextArea({
   labelText,
-  required,
   name,
   id,
+  required,
+  value,
+  onChange,
 }: TextAreaProps) {
   return (
     <div className="flex flex-col gap-3">
@@ -20,6 +24,8 @@ export default function TextArea({
         name={name}
         id={id}
         required={required}
+        value={value}
+        onChange={onChange}
         className="bg-inputBg focus:bg-[#fff] focus:border-primary font-medium text-[22px] rounded-2xl py-3 px-4 h-[75px] dark:text-[#000]"
       />
     </div>
