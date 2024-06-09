@@ -3,6 +3,7 @@ interface InputProps {
   labelText: string;
   name: string;
   id: string;
+  placeholder: string;
   required?: boolean;
   type: string;
   value?: string;
@@ -16,7 +17,8 @@ export default function Input({
   required,
   type,
   value,
-  onChange,
+  placeholder,
+  onChange = () => {},
 }: InputProps) {
   return (
     <div className="flex flex-col gap-3">
@@ -27,6 +29,7 @@ export default function Input({
         type={type}
         name={name}
         id={id}
+        placeholder={placeholder}
         required={required}
         value={value}
         onChange={onChange}

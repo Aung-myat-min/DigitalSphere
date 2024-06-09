@@ -1,7 +1,11 @@
 "use server";
+import { EmailTemplate } from "@/components/EmailTemplate/v1";
 import { PrismaClient, Profile, Message } from "@prisma/client";
+import { render } from "@react-email/components";
+const nodemailer = require("nodemailer");
 
 const prisma = new PrismaClient();
+
 export const getMessage = async (data: FormData) => {
   try {
     const name = data.get("name") as string;
@@ -21,40 +25,26 @@ export const getMessage = async (data: FormData) => {
       console.log(
         `Profile doesn't exist. Creating new profile for ${email}...`
       );
-      await createProfile({ name, email, phone })
-        .then(async () => {
-          const newProfile = await prisma.profile.findUnique({
-            where: { email },
-          });
-          if (newProfile) {
-            await createMessage({ profileId: newProfile.id, message });
-          }
-        })
-        .catch((error) => {
-          console.error("Error creating profile or message:", error);
-          throw error;
-        });
-    } else {
-      console.log(
-        `Profile already existed. Inserting new message from ${email}...`
-      );
-      await createMessage({ profileId: profile.id, message }).catch((error) => {
-        console.error("Error creating message:", error);
-        throw error;
-      });
+      profile = await createProfile({ name, email, phone });
     }
+
+    console.log(`Inserting new message from ${email}...`);
+    await createMessage({ profileId: profile.id, message });
+
+    // Send email
+    await sendEmail(email, name);
+    return "Message sent successfully";
   } catch (error) {
     console.error("Error in getMessage:", error);
-    throw error;
+    throw new Error("Failed to process the message");
   }
 };
 
 const createProfile = async ({ name, email, phone }: Omit<Profile, "id">) => {
   try {
-    const profile = await prisma.profile.create({
+    return await prisma.profile.create({
       data: { name, email, phone },
     });
-    return profile;
   } catch (error) {
     console.error("Error creating profile:", error);
     throw error;
@@ -64,19 +54,45 @@ const createProfile = async ({ name, email, phone }: Omit<Profile, "id">) => {
 const createMessage = async ({
   profileId,
   message,
-}: Omit<Message, "id" | "time"> & { time?: Date }) => {
+}: Omit<Message, "id" | "time">) => {
   try {
     const time = new Date();
-    const newMessage = await prisma.message.create({
+    return await prisma.message.create({
       data: {
         profileId,
         message,
         time,
       },
     });
-    return newMessage;
   } catch (error) {
     console.error("Error creating message:", error);
     throw error;
+  }
+};
+
+const sendEmail = async (toEmail: string, name: string) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+
+  const emailHtml = render(EmailTemplate({ email: toEmail, name }));
+
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: toEmail,
+    subject: "Welcome to Digital Sphere",
+    html: emailHtml,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    return true;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new Error("Failed to send email");
   }
 };

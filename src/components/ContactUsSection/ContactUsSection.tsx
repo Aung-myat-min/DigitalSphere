@@ -9,17 +9,44 @@ import toast, { Toaster } from "react-hot-toast";
 
 export default function ContactUsSection() {
   const formRef = useRef<HTMLFormElement>(null);
+  const [value, setValue] = useState("");
+  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let inputValue = e.target.value;
+
+    // Remove all non-digit characters except the dash
+    inputValue = inputValue.replace(/[^\d-]/g, "");
+
+    // Insert a dash after the first two digits if not already present
+    if (inputValue.length > 2 && inputValue[2] !== "-") {
+      inputValue = `${inputValue.slice(0, 2)}-${inputValue.slice(2)}`;
+    }
+
+    // Validate the format
+    const isValid = /^\d{2}-\d{6,9}$/.test(inputValue);
+    if (isValid || inputValue === "" || /^\d{1,2}$/.test(inputValue)) {
+      setError("");
+      setValue(inputValue);
+    } else {
+      setError("Invalid format. Should be 09-XXXXXX.");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(formRef.current!);
     try {
-      toast.promise(getMessage(form), {
+      await toast.promise(getMessage(form), {
         loading: "Sending Message...",
-        success: "Message Send Success...",
-        error: "Message Send Failed...",
+        success: "Message sent successfully",
+        error: "Failed to send message",
       });
-    } catch (error) {}
+      formRef.current!.reset();
+      setValue("");
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
   };
 
   return (
@@ -42,6 +69,7 @@ export default function ContactUsSection() {
             id="fullName"
             required={true}
             type="text"
+            placeholder="John Doe"
           />
           <Input
             labelText="Email"
@@ -49,14 +77,19 @@ export default function ContactUsSection() {
             id="email"
             required={true}
             type="email"
+            placeholder="yourexampleemail.com"
           />
           <Input
             labelText="Phone Number"
             name="phone"
             id="phoneNumber"
-            required={false}
+            required={true}
             type="tel"
+            onChange={handleChange}
+            value={value}
+            placeholder="09-757184004"
           />
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <TextArea
             labelText="How can we help?"
             name="message"
