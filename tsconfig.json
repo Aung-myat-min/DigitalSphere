@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    //start of edited by dev
+    "target": "es2015",
+    //end
+
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

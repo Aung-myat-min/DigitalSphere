@@ -5,13 +5,21 @@ import Button from "../common/Buttons";
 import TextArea from "./utils/TextArea";
 import React, { useRef, useState } from "react";
 import { getMessage } from "@/app/api/sendEmail";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ContactUsSection() {
   const formRef = useRef<HTMLFormElement>(null);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const form = new FormData(formRef.current!);
-    getMessage(form);
     e.preventDefault();
+    const form = new FormData(formRef.current!);
+    try {
+      toast.promise(getMessage(form), {
+        loading: "Sending Message...",
+        success: "Message Send Success...",
+        error: "Message Send Failed...",
+      });
+    } catch (error) {}
   };
 
   return (
@@ -65,6 +73,7 @@ export default function ContactUsSection() {
         height={721}
         className="hidden w-[50%] tablet:block"
       />
+      <Toaster />
     </section>
   );
 }
