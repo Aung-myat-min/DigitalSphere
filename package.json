@@ -9,7 +9,7 @@
     "lint": "next lint",
     "validate": "prisma validate",
     "format": "prisma format",
-    "migrate": "prisma migrate dev",
+    "migrate": "dotenv -e .env.local prisma migrate dev",
     "validate-and-format": "run-s validate format"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-email": "^2.1.4",
+    "react-google-recaptcha": "^3.1.0",
     "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@types/nodemailer": "^6.4.15",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/react-google-recaptcha": "^2.1.9",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "npm-run-all": "^4.1.5",

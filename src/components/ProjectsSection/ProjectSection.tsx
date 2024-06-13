@@ -17,7 +17,7 @@ export default function ProjectSection() {
           </h1>
           <pre className="text-[#fff] mt-2 text-wrap">
             Discover our portfolio of innovative digital projects showcasing our
-            expertise in web development, mobile apps, and software solutions."
+            expertise in web development, mobile apps, and software solutions.
           </pre>
         </div>
       </div>

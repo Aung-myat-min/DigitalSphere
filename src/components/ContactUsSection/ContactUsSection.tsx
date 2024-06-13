@@ -6,11 +6,17 @@ import TextArea from "./utils/TextArea";
 import React, { useRef, useState } from "react";
 import { getMessage } from "@/app/api/sendEmail";
 import toast, { Toaster } from "react-hot-toast";
+import ReCaptchaV2 from "react-google-recaptcha";
+import ErrorBoundary from "../common/ErrorBountry";
 
+const key = process.env.NEXT_PUBLIC_CLIENT_CAPTCHA_KEY || "";
 export default function ContactUsSection() {
   const formRef = useRef<HTMLFormElement>(null);
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
+
+  const [captcha, setCaptcha] = useState<null | string>(null);
+  const recaptchaRef = useRef<ReCaptchaV2>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let inputValue = e.target.value;
@@ -35,17 +41,23 @@ export default function ContactUsSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(formRef.current!);
-    try {
-      await toast.promise(getMessage(form), {
-        loading: "Sending Message...",
-        success: "Message sent successfully",
-        error: "Failed to send message",
-      });
-      formRef.current!.reset();
-      setValue("");
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
+    if (captcha) {
+      const form = new FormData(formRef.current!);
+      try {
+        await toast.promise(getMessage(form), {
+          loading: "Sending Message...",
+          success: "Message sent successfully",
+          error: "Failed to send message",
+        });
+        formRef.current!.reset();
+        setValue("");
+        recaptchaRef.current!.reset(); // Reset the reCAPTCHA
+        setCaptcha(null); // Clear the captcha state
+      } catch (error) {
+        console.error("Error in handleSubmit:", error);
+      }
+    } else {
+      alert("Please verify that you are not a robot");
     }
   };
 
@@ -61,7 +73,7 @@ export default function ContactUsSection() {
         id="form"
         ref={formRef}
       >
-        <h1 className="text-[40px] font-bold mb-7">Let's Talk</h1>
+        <h1 className="text-[40px] font-bold mb-7">{"Let's Talk"}</h1>
         <div className="flex flex-col gap-5 mb-8">
           <Input
             labelText="Full Name"
@@ -97,6 +109,16 @@ export default function ContactUsSection() {
             required={true}
           />
         </div>
+
+        <ErrorBoundary>
+          <ReCaptchaV2
+            sitekey={key}
+            className="mx-auto my-3"
+            onChange={setCaptcha}
+            ref={recaptchaRef}
+          />
+        </ErrorBoundary>
+
         <Button text="Send Message" type="primary" className="w-[200px]" />
       </form>
       <Image

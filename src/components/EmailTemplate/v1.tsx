@@ -73,7 +73,7 @@ export const EmailTemplate = ({ name, email }: EmailProps) => (
           </Row>
         </Section>
         <Text style={paragraph}>
-          We're excited to have you on board!,
+          {"We're excited to have you on board!,"}
           <br />
           Digital Sphere
         </Text>
